@@ -1,6 +1,7 @@
 import 'package:currency_conversion/data_source/exchangerate/exchange_rate_data_source.dart';
 import 'package:currency_conversion/data_source/exchangerate/remote/exchange_rate_data_source_api.dart';
 import 'package:currency_conversion/ui/converter/cubit/converter_cubit.dart';
+import 'package:currency_conversion/ui/history/cubit/history_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:dioc/dioc.dart' as dioc;
 
@@ -27,11 +28,18 @@ class Injector {
   ExchangeRateDataSource get exchangeRateDataSource =>
       _container.get<ExchangeRateDataSource>(creator: 'ExchangeRateDataSource');
 
+  HistoryCubit get historyCubit =>
+      _container.get<HistoryCubit>(creator: 'HistoryCubit');
+
   void _registerCubits() {
     _container.register<ConverterCubit>(
-      (c) => ConverterCubit(
-          exchangeRate: exchangeRateDataSource),
+      (c) => ConverterCubit(exchangeRate: exchangeRateDataSource),
       name: 'ConverterCubit',
+      defaultMode: dioc.InjectMode.create,
+    );
+    _container.register<HistoryCubit>(
+      (c) => HistoryCubit(),
+      name: 'HistoryCubit',
       defaultMode: dioc.InjectMode.create,
     );
   }
