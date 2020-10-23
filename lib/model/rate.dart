@@ -2,7 +2,7 @@ import 'package:ms_map_utils/ms_map_utils.dart';
 import 'package:ms_persist/ms_persist.dart';
 
 class Rate with Persist<Rate> {
-  DateTime date, createdAt, updatedAt;
+  DateTime date, createdAt = DateTime.now(), updatedAt = DateTime.now();
   String uuid, base, baseValue, symbol, symbolValue;
   Map<String, num> rates;
 
@@ -30,11 +30,11 @@ class Rate with Persist<Rate> {
       ),
       createdAt: map.doIfContains(
         'createdAt',
-        doWork: (key, value) => DateTime.tryParse(value),
+        doWork: (key, value) => value == null ? null : DateTime.parse(value),
       ),
       updatedAt: map.doIfContains(
         'updatedAt',
-        doWork: (key, value) => DateTime.tryParse(value),
+        doWork: (key, value) => value == null ? null : DateTime.parse(value),
       ),
       rates: map['rates']
           .map((k, v) => MapEntry<String, num>(k, v))
@@ -44,9 +44,9 @@ class Rate with Persist<Rate> {
 
   Map<String, dynamic> toMap() {
     return {
-      'date': this.date.toIso8601String(),
-      'createdAt': this.createdAt.toIso8601String(),
-      'updatedAt': this.updatedAt.toIso8601String(),
+      'date': this.date?.toIso8601String(),
+      'createdAt': this.createdAt?.toIso8601String(),
+      'updatedAt': this.updatedAt?.toIso8601String(),
       'uuid': this.uuid,
       'base': this.base,
       'baseValue': this.baseValue,
