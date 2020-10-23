@@ -9,7 +9,11 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Histórico'),
+        title: Text(
+          'Histórico',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: IconThemeData(color: Colors.white),
       ),
       body: RefreshIndicator(
         onRefresh: () async => context.bloc<HistoryCubit>().refresh(),

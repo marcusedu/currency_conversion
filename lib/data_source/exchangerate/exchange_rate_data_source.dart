@@ -1,4 +1,3 @@
-
 import 'package:currency_conversion/model/rate.dart';
 
 abstract class ExchangeRateDataSource {
