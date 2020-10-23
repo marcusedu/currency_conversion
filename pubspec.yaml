@@ -10,7 +10,10 @@ dependencies:
     sdk: flutter
   dio: ^3.0.1
   dioc: ^0.1.6
+  easy_mask: ^1.1.3
   flutter_bloc: ^6.0.6
+  material_design_icons_flutter: ^4.0.5755
+  ms_material_color: any # package desenvolvido por mim
   ms_map_utils: ^0.7.0 # package desenvolvido por mim
   ms_persist: ^1.0.0 # package desenvolvido por mim
   ms_undraw: ^2.2.0 # package mantido e melhorado por mim
