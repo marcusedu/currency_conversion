@@ -8,7 +8,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  dio: ^3.0.1
+  dioc: ^0.1.6
+  flutter_bloc: ^6.0.6
+  ms_map_utils: ^0.7.0 # package desenvolvido por mim
+  ms_persist: ^1.0.0 # package desenvolvido por mim
+  ms_undraw: ^2.2.0 # package mantido e melhorado por mim
+  rxdart: ^0.24.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
