@@ -1,5 +1,6 @@
 import 'package:currency_conversion/routes/app_routes.dart';
 import 'package:currency_conversion/ui/converter/cubit/converter_cubit.dart';
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -80,9 +81,16 @@ class ConverterScreen extends StatelessWidget {
                     TextFormField(
                       controller: context.bloc<ConverterCubit>().baseCtrl,
                       keyboardType: TextInputType.numberWithOptions(),
+                      inputFormatters: [
+                        TextInputMask(
+                            mask: '9+.999,99',
+                            placeholder: '0',
+                            maxPlaceHolders: 3,
+                            reverse: true)
+                      ],
                       decoration: InputDecoration(
                         labelText:
-                            'Valor ${state is ExchangeRateLoaded ? state.base : ''}',
+                            'Valor ${state is ExchangeRateLoaded ? state.base ?? '' : ''}',
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty)
@@ -119,9 +127,18 @@ class ConverterScreen extends StatelessWidget {
                     ),
                     Divider(color: Colors.transparent),
                     TextFormField(
-                      controller: context.bloc<ConverterCubit>().symbolCtrl,
+                      controller: context
+                          .bloc<ConverterCubit>()
+                          .symbolCtrl,
                       keyboardType: TextInputType.number,
                       enabled: false,
+                      inputFormatters: [
+                        TextInputMask(
+                            mask: '9+.999,99',
+                            placeholder: '0',
+                            maxPlaceHolders: 3,
+                            reverse: true)
+                      ],
                       decoration: InputDecoration(
                         labelText: 'Novo Valor',
                       ),
@@ -134,6 +151,8 @@ class ConverterScreen extends StatelessWidget {
                                 .bloc<ConverterCubit>()
                                 .baseCtrl
                                 .text
+                                .replaceAll('.', '')
+                                .replaceAll(',', '.')
                                 .trim());
                         },
                         color: Theme.of(context).primaryColor,
